@@ -1,4 +1,7 @@
+package data;
 import java.util.ArrayList;
+
+import engine.SongColmun;
 
 
 public class Song {
@@ -54,19 +57,19 @@ public class Song {
 	 * 목적 : this와 target을 공통적으로 들은 사람의 수 
 	 * 활용 : Engine Class_makeMatrixSong의 각 열의 값
 	 * 필요한 메소드 : Song Class_isListened() 들었던 곡인지 확인 
+	 * 필요한 메소드 : SongColmun Class_createSongColmun() 열 객체 생성 
 	 * @param target 비교하교자 하는 대상 
 	 * @return sameList 같은 사람(객체)을 저장한 리스트 반환 
 	 */
-	public ArrayList<Player> compareSong(Song target) {
-		ArrayList<Player> sameList = new ArrayList<Player>();
+	public SongColmun compareSong(Song origin, Song target) {
+	ArrayList<Player> sameList = new ArrayList<Player>();
 		
 		for (Player player : playerList) {
 			if(target.isListened(player)){
 				sameList.add(player);
 			}
 		}
-		return sameList;
-		
+		return SongColmun.createSongColmun(origin, target, sameList) ;
 	}
 	
 	/**
@@ -94,5 +97,7 @@ public class Song {
 	public ArrayList<Song> getRealationSong(){
 		return this.relationSongList;
 	}
+
+	
 
 }

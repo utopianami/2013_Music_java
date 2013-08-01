@@ -1,14 +1,20 @@
+package engine;
+import java.util.ArrayList;
 
+import data.Database;
+import data.Player;
+import engine.Engine;
 import junit.framework.TestCase;
 
 
-
-public class DatabaseTest extends TestCase {
+public class EngineTest extends TestCase {
 	Database db;
+	Engine engine;
 	
 	
 	public void setUp(){
 		db = new Database();
+		engine = new Engine(); 
 		
 		//사람 
 		db.addPlayer("youngnam");
@@ -104,32 +110,17 @@ public class DatabaseTest extends TestCase {
 		db.linkedData(9, 9);
 	}
 	
-	//player 생성자 
-	public void testCreatePlayer() throws Exception {
-		Database db1 = new Database();
-		
-		db1.addPlayer("youngnam");
-		db1.addPlayer("nami");
-		
-		int actual = db1.getPlayerList().get(1).getIndex();
-		assertEquals(1, actual);
+	//matrixPlayer
+	public void testMakeMatrixPlayer() throws Exception {
+		engine.makeMatrixPlayer(db);
+		assertEquals(3, engine.getMatrixPlayer().get(0).get(1).size());
 	}
 	
-	//song 생성자 
-	public void testCreateSong() throws Exception {
-		Database db2 = new Database();
+	public void testMakeMatrixSong() throws Exception {
+		engine.makeMatrixSong(db);
+		ArrayList<ArrayList<SongColmun>> matrixSong = engine.getMatrixSong();
 		
-		db2.addSong("moai", "Seo-Tae-Ji");
-		db2.addSong("ThisLove", "maroon5");
-		
-		int actual = db2.getSongList().get(1).getIndex();
-		assertEquals(1, actual);
+		assertEquals(6, matrixSong.get(9).get(9).getCommonPlayerCount());
+		assertEquals(6, matrixSong.get(7).get(7).getCommonPlayerCount());
 	}
-	
-	
-	//linkedData
-	public void testLinkedData() throws Exception {
-		assertEquals("moai", db.findPlayer(0).myMusicList.get(0).getSongName());
-	}
-	
 }
