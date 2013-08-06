@@ -27,7 +27,7 @@ public class ColumnMusic {
 		return compareMusic;
 	}
 	
-	public ArrayList<User> getSameMusic(){
+	public ArrayList<User> getSameUser(){
 		return sameUser;
 	}
 	
