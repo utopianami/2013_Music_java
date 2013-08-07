@@ -37,7 +37,6 @@ public class Engine {
 		ArrayList<User> userList = db.getUserList();
 		
 		for (User standardUser : userList) {
-			System.out.println("야호 ");
 			Row row = new Row();
 			row.makeRowUser(standardUser, userList);
 			userMatrix.add(row);
@@ -55,32 +54,45 @@ public class Engine {
 	}
 
 	//나와 유사한 사람 선정 
-	public User relationUser(Database db, int index) {
+	public User relationUser(Database db, User standardUser) {
 		makeMusicMatrix(db);
-		ArrayList<ColumnUser> filterList = getUserMatrix(index).getRowUser();
+		int userIndex = standardUser.getUserIndex();
+		Row sortRow = getUserMatrix(userIndex);
 		
 		ColumnUser sortCompare = new ColumnUser();
-		Collections.sort(filterList, sortCompare);
-		return filterList.get(1).getCompareUser(); //자기 자신을 제외한 최상위 index 1 
+		Collections.sort(sortRow.getRowUser(), sortCompare);
+		
+		User mostRelationUser = sortRow.getMostRelationUser();//자기 자신을 제외한 최상위 index 1 
+		return mostRelationUser; 
 	}
 	
-	//추천 기준1 : 나와 유사한 사람 -> 그 사람이 최근들은 곡  
-	public Music recommendByRecently(Database db, int index){
-		User user = db.findUser(index);
-		User mostRelationUser = relationUser(db, index);
-		ArrayList<Music> recentlyPlayed = mostRelationUser.getRecentlyPlayed(5);
-		Music recommendMusic = null;
-		 
-		for (Music guessMusic : recentlyPlayed) {
-			if(user.isListened(guessMusic)){ //들었던 곡이라면 
-				continue;
-			}
-			
-			else{
-				recommendMusic = guessMusic;
-				break;
-			}
-		}
+	//추천 기준1 : 나와 유사한 사람 -> 그 사람이 최근들은 곡
+	//들었던 곡일 경우 다음 최근 재생목록의 곡 추천 
+	public Music recommendMusic1(Database db, User standardUser){
+		User mostRelationUser = relationUser(db, standardUser);	
+		Music recommendMusic = mostRelationUser.getRecomendMusic1(standardUser);
+		
+	
+		return recommendMusic;
+	}
+	
+	//유사한 노래 선정 
+	public Music relationMusic(Database db, Music standardMusic) {
+		makeMusicMatrix(db);
+		int musicIndex = standardMusic.getMusicIndex();
+		Row sortRow = getMusicMatrix(musicIndex);
+		
+		ColumnMusic sortCompare = new ColumnMusic();
+		Collections.sort(sortRow.getRowMusic(), sortCompare);
+		
+		Music mostRelationMusic = sortRow.getMostRelationMusic();  
+		return mostRelationMusic;
+	}
+	
+	//추천기준 2 : 최근에 들은 곡 -> 그 곡과 유사한 곡
+	//들었던 곡일 경우 나의 다음 최신곡으로 추천 
+	public Music recommnedMusic2(Database db, User user){
+		Music recommendMusic = user.getRecomendMusic2(user, this, db);
 		return recommendMusic;
 	}
 }

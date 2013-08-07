@@ -55,8 +55,8 @@ public class EngineTest extends TestCase {
 		
 		//2번사람
 		db.findUser(2).listenedMusic(db.findMusic(2));
-		db.findUser(2).listenedMusic(db.findMusic(4));
 		db.findUser(2).listenedMusic(db.findMusic(7));
+		db.findUser(2).listenedMusic(db.findMusic(4));
 		db.findUser(2).listenedMusic(db.findMusic(8));
 		db.findUser(2).listenedMusic(db.findMusic(9));
 		
@@ -74,6 +74,7 @@ public class EngineTest extends TestCase {
 		db.findUser(4).listenedMusic(db.findMusic(2));
 		db.findUser(4).listenedMusic(db.findMusic(6));
 		db.findUser(4).listenedMusic(db.findMusic(7));
+		//db.findUser(4).listenedMusic(db.findMusic(9));
 		
 		//5번사람 
 		db.findUser(5).listenedMusic(db.findMusic(2));
@@ -88,12 +89,14 @@ public class EngineTest extends TestCase {
 		db.findUser(6).listenedMusic(db.findMusic(5));
 		db.findUser(6).listenedMusic(db.findMusic(6));
 		db.findUser(6).listenedMusic(db.findMusic(8));
+		db.findUser(6).listenedMusic(db.findMusic(9));
 		
 		//7번사람 
 		db.findUser(7).listenedMusic(db.findMusic(1));
 		db.findUser(7).listenedMusic(db.findMusic(3));
 		db.findUser(7).listenedMusic(db.findMusic(4));
 		db.findUser(7).listenedMusic(db.findMusic(6));
+		db.findUser(7).listenedMusic(db.findMusic(8));
 		db.findUser(7).listenedMusic(db.findMusic(9));
 		
 		//8번사람 
@@ -101,7 +104,7 @@ public class EngineTest extends TestCase {
 		db.findUser(8).listenedMusic(db.findMusic(3));
 		db.findUser(8).listenedMusic(db.findMusic(5));
 		db.findUser(8).listenedMusic(db.findMusic(7));
-		db.findUser(8).listenedMusic(db.findMusic(8));
+		db.findUser(8).listenedMusic(db.findMusic(9));
 		
 		//9번 사람
 		db.findUser(9).listenedMusic(db.findMusic(0));
@@ -126,12 +129,21 @@ public class EngineTest extends TestCase {
 		assertEquals(6, engine.getMusicMatrix(0).getRowMusic().get(0).getSameUser().size());
 		
 		//relationUser()
-		User mostRelation= engine.relationUser(db, 0);
+		User mostRelation= engine.relationUser(db, db.findUser(0));
 		assertEquals(4, mostRelation.getUserIndex());
 		
-		//recommendByRecently()
-		Music recommendMusic = engine.recommendByRecently(db, 0);
+		//recommendMusic1()
+		Music recommendMusic = engine.recommendMusic1(db, db.findUser(0));
 		assertEquals("Yello", recommendMusic.getTrack());
+		
+		//relationMusic()
+		Music mostRelationMusic = engine.relationMusic(db, db.findMusic(9));
+		assertEquals(3, mostRelationMusic.getMusicIndex());
+		
+		//recommendMusic2()
+		Music recommendMusic2 = engine.recommnedMusic2(db, db.findUser(2));
+		assertEquals(3, recommendMusic2.getMusicIndex());
+		
 	}
 	
 }

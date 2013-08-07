@@ -37,8 +37,19 @@ public class Mumu {
 		user.addFavouriteMusic(music);
 	}
 	
-	public  Music recommendByRecently(int index){
-		return engine.recommendByRecently(db, index);
+	//추천 기준1 : 나와 유사한 사람 -> 그 사람이 최근들은 곡
+	//들었던 곡일 경우 다음 최근 재생목록의 곡 추천 
+	public  Music recommendMusic(int userIndex){
+		User standardUser = db.findUser(userIndex);
+		return engine.recommendMusic1(db, standardUser);
 	}
+	
+	//추천기준 2 : 최근에 들은 곡 -> 그 곡과 유사한 곡
+	//들었던 곡일 경우 나의 다음 최신곡으로 추천 
+	public Music recommendMusic2(int userIndex){
+		User standardUser = db.findUser(userIndex);
+		return engine.recommnedMusic2(db, standardUser);
+	}
+	
 	
 }
