@@ -42,4 +42,14 @@ public class Row {
 		}
 	}
 
+	public Music getMostRelationMusic() {
+		return rowMusic.get(1).getCompareMusic(); //자기 자신을 제외한 최상위 index 1
+	}
+	
+	public User getMostRelationUser() {
+		return rowUser.get(1).getCompareUser(); //자기 자신을 제외한 최상위 index 1
+	}
+	
+	
+
 }

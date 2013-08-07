@@ -2,6 +2,8 @@ package data;
 
 import java.util.ArrayList;
 
+import engine.Engine;
+
 public class User {
 
 	private int userIndex;
@@ -66,6 +68,31 @@ public class User {
 			}
 		}
 		return sameMusic;
+	}
+
+	public Music getRecomendMusic1(User standardUser) {
+		Music recommendMusic = null;
+		
+		for (Music guessMusic : getRecentlyPlayed(5)) {
+			if(!standardUser.isListened(guessMusic)){ //들었던 곡이라면 
+				recommendMusic = guessMusic;
+				break;
+			}
+		}
+		return recommendMusic;
+	}
+
+	public Music getRecomendMusic2(User user, Engine engine, Database db) {
+		Music recommendMusic = null;
+		for (Music music : user.getRecentlyPlayed(5)) {
+			Music mostRelationMusic = engine.relationMusic(db, music);
+			
+			if(!user.isListened(mostRelationMusic)){
+				recommendMusic = mostRelationMusic;
+				break;
+			}
+		}
+		return recommendMusic;
 	}
 	
 

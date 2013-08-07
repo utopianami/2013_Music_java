@@ -1,11 +1,12 @@
 package engine;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import data.Music;
 import data.User;
 
-public class ColumnMusic {
+public class ColumnMusic implements Comparator<ColumnMusic> {
 
 	private ArrayList<User> sameUser = new ArrayList<User>();
 	private Music standardMusic; // 행 
@@ -33,6 +34,12 @@ public class ColumnMusic {
 	
 	public int getSameMusicCount(){
 		return sameUserCount;
+	}
+
+
+	@Override
+	public int compare(ColumnMusic o1, ColumnMusic o2) {
+		return o2.sameUserCount - o1.sameUserCount;
 	}
 
 }
