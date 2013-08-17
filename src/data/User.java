@@ -74,7 +74,7 @@ public class User {
 		Music recommendMusic = null;
 		
 		for (Music guessMusic : getRecentlyPlayed(5)) {
-			if(!standardUser.isListened(guessMusic)){ //들었던 곡이라면 
+			if(!standardUser.isListened(guessMusic)){ //들었던 곡이 아니라면 
 				recommendMusic = guessMusic;
 				break;
 			}

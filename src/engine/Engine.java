@@ -57,7 +57,7 @@ public class Engine {
 	public User relationUser(Database db, User standardUser) {
 		makeMusicMatrix(db);
 		int userIndex = standardUser.getUserIndex();
-		Row sortRow = getUserMatrix(userIndex);
+		Row sortRow = getUserMatrix(userIndex); //satnardUser와 다른 user간의 관계를 나타내는 Row 
 		
 		ColumnUser sortCompare = new ColumnUser();
 		Collections.sort(sortRow.getRowUser(), sortCompare);
@@ -71,7 +71,6 @@ public class Engine {
 	public Music recommendMusic1(Database db, User standardUser){
 		User mostRelationUser = relationUser(db, standardUser);	
 		Music recommendMusic = mostRelationUser.getRecomendMusic1(standardUser);
-		
 	
 		return recommendMusic;
 	}
@@ -80,7 +79,7 @@ public class Engine {
 	public Music relationMusic(Database db, Music standardMusic) {
 		makeMusicMatrix(db);
 		int musicIndex = standardMusic.getMusicIndex();
-		Row sortRow = getMusicMatrix(musicIndex);
+		Row sortRow = getMusicMatrix(musicIndex); //standardMusic과 다른 Musci간의 관계를 나타내는 Row
 		
 		ColumnMusic sortCompare = new ColumnMusic();
 		Collections.sort(sortRow.getRowMusic(), sortCompare);
