@@ -55,7 +55,7 @@ public class Engine {
 
 	//나와 유사한 사람 선정 
 	public User relationUser(Database db, User standardUser) {
-		makeMusicMatrix(db);
+		makeUserMatrix(db);
 		int userIndex = standardUser.getUserIndex();
 		Row sortRow = getUserMatrix(userIndex); //satnardUser와 다른 user간의 관계를 나타내는 Row 
 		

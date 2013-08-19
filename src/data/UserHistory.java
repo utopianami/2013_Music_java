@@ -7,14 +7,14 @@ public class UserHistory {
 	
 	private ArrayList<Music> MyMusic = new ArrayList<Music>();
 	private ArrayList<Music> favouriteMusic = new ArrayList<Music>();
-	private ArrayList<Music> playHistory = new ArrayList<Music>();
-	private HashMap<Music, Integer> musicCount = new HashMap<Music, Integer>(); 
-	
+	ArrayList<Music> playHistory = new ArrayList<Music>();
+	private HashMap<Music, Integer> musicCount = new HashMap<Music, Integer>();
 		
 	public static UserHistory create() {
 		return new UserHistory();
 	}
-			
+		
+	//user class 데이터 전송 
 	public ArrayList<Music> getMyMusic() {
 		return MyMusic;
 	}
@@ -27,6 +27,7 @@ public class UserHistory {
 		return favouriteMusic;
 	}
 	
+	//range 범위만큼 최신곡 리스트 전달 
 	public ArrayList<Music> getRecentlyPlayed(int range){
 		ArrayList<Music> recentlyPlayed = new ArrayList<Music>();
 		
@@ -49,7 +50,6 @@ public class UserHistory {
 			music.addUserList(user);
 		}
 	}
-
 
 	public boolean firstListend(Music music) {
 		return !MyMusic.contains(music);
@@ -77,6 +77,5 @@ public class UserHistory {
 	private boolean isAlreadyAdded(Music music) {
 		return favouriteMusic.contains(music);
 	}
-
 
 }

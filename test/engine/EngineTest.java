@@ -143,7 +143,8 @@ public class EngineTest extends TestCase {
 		//recommendMusic2()
 		Music recommendMusic2 = engine.recommnedMusic2(db, db.findUser(2));
 		assertEquals(3, recommendMusic2.getMusicIndex());
-		
 	}
+	
+
 	
 }

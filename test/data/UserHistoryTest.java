@@ -42,9 +42,13 @@ public class UserHistoryTest extends TestCase {
 		history.listenedMusic(music1, user);
 		history.listenedMusic(music2, user);
 		history.listenedMusic(music, user);
+		history.listenedMusic(music, user);
+		history.listenedMusic(music1, user);
+		history.listenedMusic(music1, user);
+		history.listenedMusic(music, user);
 		
-		assertEquals(2, history.getRecentlyPlayed(2).size());
-		assertEquals(music2, history.getRecentlyPlayed(2).get(1));
+		assertEquals(5, history.getRecentlyPlayed(5).size());
+		assertEquals(music1, history.getRecentlyPlayed(2).get(1));
 	}
 	
 	public void testFavouruteMusic() throws Exception {

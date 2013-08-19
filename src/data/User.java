@@ -1,7 +1,6 @@
 package data;
 
 import java.util.ArrayList;
-
 import engine.Engine;
 
 public class User {
@@ -9,12 +8,14 @@ public class User {
 	private int userIndex;
 	private String name;
 	private UserHistory userHistory;
+	private Recommend recommend;
 	
 	
 	private User(int index, String name) {
 		this.userIndex = index;
 		this.name = name;
 		this.userHistory = UserHistory.create();
+		this.recommend = Recommend.create();
 	}
 	
 	public static User create(int index, String name){
@@ -58,7 +59,25 @@ public class User {
 	public int getMusicCount(Music music){
 		return userHistory.getMusicCount(music);
 	}
+	
+	//recommend에 접근
+	public void addRecommendMusic(Music recommendMusic, int standardNumber) {
+		if (recommend.isOverRecommendLength()){
+			setRecommendList();
+			recommend.reset();
+		}
+		
+		recommend.addRecommendMusic(recommendMusic, standardNumber);
+	}
+	
+	public void setRecommendList(){
+		ArrayList<Music> favouriteMusic = getFavouriteMusic();
+		ArrayList<Music> recentlyPlayed = getRecentlyPlayed(20);
+		recommend.setStandardMap(favouriteMusic, recentlyPlayed);
+	}
+	
 
+	//engine
 	public ArrayList<Music> compareMusic(User compareUser) {
 		ArrayList<Music> sameMusic = new ArrayList<Music>();
 		
@@ -69,7 +88,7 @@ public class User {
 		}
 		return sameMusic;
 	}
-
+	
 	public Music getRecomendMusic1(User standardUser) {
 		Music recommendMusic = null;
 		
@@ -94,6 +113,5 @@ public class User {
 		}
 		return recommendMusic;
 	}
-	
 
 }
