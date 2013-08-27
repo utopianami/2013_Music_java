@@ -1,5 +1,8 @@
 package main;
 
+import com.mumu.data.Music;
+import com.mumu.main.Mumu;
+
 import junit.framework.TestCase;
 
 
@@ -103,8 +106,8 @@ public class MumuTest extends TestCase {
 		main.listenedMusic(9, 5);
 		main.listenedMusic(9, 9);
 		
-		main.makeMusicMatrix();
-		main.makeUserMatrix();
+
+		main.refreshMatrix();
 	}
 	
 	public void testCreateUser() throws Exception {
@@ -113,6 +116,73 @@ public class MumuTest extends TestCase {
 	
 	public void testCreateMusic() throws Exception {
 		assertEquals("moai",main.findMusic(0).getTrack());
+	}
+	
+	public void testRecommendMusic() throws Exception {
+		Music a = main.findMusic(0);
+		Music b = main.findMusic(1);
+		
+		main.findUser(0).addRecommendMusic(a, 1);
+		main.findUser(0).addRecommendMusic(b, 1);
+		main.findUser(0).addRecommendMusic(b, 1);
+		main.findUser(0).addRecommendMusic(a, 1);
+		main.findUser(0).addRecommendMusic(a, 1);
+		
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		
+		main.findUser(0).addRecommendMusic(a, 1);
+		main.findUser(0).addRecommendMusic(a, 1);
+		main.findUser(0).addRecommendMusic(a, 1);
+		main.findUser(0).addRecommendMusic(a, 1);
+
+		
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		main.findUser(0).isListened(a);
+		
+		main.recommendMusic(0);
 	}
 	
 }

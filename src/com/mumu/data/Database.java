@@ -1,4 +1,4 @@
-package data;
+package com.mumu.data;
 import java.util.ArrayList;
 
 
@@ -23,6 +23,7 @@ public class Database {
 		userList.add(newPlayer);
 		userIndex++;
 	}
+	
 
 	public void addMusic(String track, String artist, String album) {
 		Music newMusic = Music.create(musicIndex, track, artist, album);
@@ -45,4 +46,5 @@ public class Database {
 	public ArrayList<Music> getMusicList() {
 		return musicList;
 	}
+	
 }

@@ -1,11 +1,11 @@
-package engine;
+package com.mumu.engine;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
-import data.Database;
-import data.Music;
-import data.User;
+import com.mumu.data.Database;
+import com.mumu.data.Music;
+import com.mumu.data.User;
 
 public class Engine {
 	private ArrayList<Row> userMatrix = new ArrayList<Row>();
@@ -26,6 +26,7 @@ public class Engine {
 		return musicMatrix.get(index);
 	}
 	
+
 	
 	/*
 	 * user 곱으로 user간의 관계를 나타내는 matrix 생성
@@ -52,6 +53,19 @@ public class Engine {
 			musicMatrix .add(row);
 		}
 	}
+	
+	//노래추천
+	public Music recommendMusic(int standardNumber, Database db, User standardUser){
+		if (standardNumber == 1){
+			return recommendMusic1(db, standardUser);
+		}
+
+		if (standardNumber == 2){
+			return recommnedMusic2(db, standardUser);
+		}
+		return null;
+	}
+	
 
 	//나와 유사한 사람 선정 
 	public User relationUser(Database db, User standardUser) {

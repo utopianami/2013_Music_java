@@ -1,8 +1,10 @@
 package engine;
 
 
-import data.Music;
-import data.User;
+import com.mumu.data.Music;
+import com.mumu.data.User;
+import com.mumu.engine.ColumnUser;
+
 import junit.framework.TestCase;
 
 public class ColumnUserTest extends TestCase {

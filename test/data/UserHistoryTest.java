@@ -1,5 +1,9 @@
 package data;
 
+import com.mumu.data.Music;
+import com.mumu.data.User;
+import com.mumu.data.UserHistory;
+
 import junit.framework.TestCase;
 
 public class UserHistoryTest extends TestCase {
@@ -57,6 +61,6 @@ public class UserHistoryTest extends TestCase {
 		
 		history.addFavouriteMusic(music);
 		history.addFavouriteMusic(music);
-		assertEquals(music, history.getFavouriteMusic().get(0));
+		assertTrue(history.getFavouriteMusic().contains(music));
 	}
 }

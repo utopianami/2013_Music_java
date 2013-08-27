@@ -1,4 +1,4 @@
-package data;
+package com.mumu.data;
 
 import java.util.ArrayList;
 

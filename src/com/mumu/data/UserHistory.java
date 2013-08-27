@@ -1,13 +1,15 @@
-package data;
+package com.mumu.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class UserHistory {
 	
 	private ArrayList<Music> MyMusic = new ArrayList<Music>();
-	private ArrayList<Music> favouriteMusic = new ArrayList<Music>();
-	ArrayList<Music> playHistory = new ArrayList<Music>();
+	private Set<Music> favouriteMusic = new HashSet<Music>();
+	private ArrayList<Music> playHistory = new ArrayList<Music>();
 	private HashMap<Music, Integer> musicCount = new HashMap<Music, Integer>();
 		
 	public static UserHistory create() {
@@ -23,8 +25,12 @@ public class UserHistory {
 		return musicCount.get(music);
 	}
 	
-	public ArrayList<Music> getFavouriteMusic (){
+	public Set<Music> getFavouriteMusic(){
 		return favouriteMusic;
+	}
+	
+	public ArrayList<Music> getPlayHistory(){
+		return playHistory;
 	}
 	
 	//range 범위만큼 최신곡 리스트 전달 
@@ -73,8 +79,14 @@ public class UserHistory {
 			favouriteMusic.add(music);
 		}
 	}
+	
 
-	private boolean isAlreadyAdded(Music music) {
+	public void removeFavouriteMusic(Music music) {
+		favouriteMusic.remove(music);
+	}
+
+
+	public boolean isAlreadyAdded(Music music) {
 		return favouriteMusic.contains(music);
 	}
 

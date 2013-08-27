@@ -1,5 +1,8 @@
 package data;
 
+import com.mumu.data.Music;
+import com.mumu.data.Recommend;
+
 import junit.framework.TestCase;
 
 public class RecommendTest extends TestCase {

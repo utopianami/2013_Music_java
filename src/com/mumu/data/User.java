@@ -1,7 +1,9 @@
-package data;
+package com.mumu.data;
 
 import java.util.ArrayList;
-import engine.Engine;
+import java.util.Set;
+
+import com.mumu.engine.Engine;
 
 public class User {
 
@@ -39,6 +41,10 @@ public class User {
 		userHistory.addFavouriteMusic(music);
 	}
 	
+	public void removeFavorite(Music music) {
+		userHistory.removeFavouriteMusic(music);
+	}
+	
 	public boolean isListened(Music music){
 		return !userHistory.firstListend(music);
 	}
@@ -52,7 +58,7 @@ public class User {
 		return userHistory.getRecentlyPlayed(range);
 	}
 	
-	public ArrayList<Music> getFavouriteMusic(){
+	public Set<Music> getFavouriteMusic(){
 		return userHistory.getFavouriteMusic();
 	}
 	
@@ -61,19 +67,63 @@ public class User {
 	}
 	
 	//recommend에 접근
-	public void addRecommendMusic(Music recommendMusic, int standardNumber) {
-		if (recommend.isOverRecommendLength()){
-			setRecommendList();
-			recommend.reset();
+	public void takeRecommendMusic(Music recommendMusic, int standardNumber) {
+		if (recommend.isOverRecommendLength()){ //추천을 7번 해줬다면 
+			resetExpectRecommend(); // 이전 추천결과에 대한 결과 확인 + 기준 재설정 
+			recommend.reset(); //추천받은 기준 리스트 + 추천해준 노래 리스트 초기화(0)
 		}
-		
-		recommend.addRecommendMusic(recommendMusic, standardNumber);
+
+		recommend.takeRecommendMusic(recommendMusic, standardNumber);
 	}
 	
-	public void setRecommendList(){
-		ArrayList<Music> favouriteMusic = getFavouriteMusic();
-		ArrayList<Music> recentlyPlayed = getRecentlyPlayed(20);
-		recommend.setStandardMap(favouriteMusic, recentlyPlayed);
+	public void resetExpectRecommend(){
+		recommend.checkRecommendResult(this); //이전 추천에 대한 결과확인 
+		recommend.resetExpectStandard(); // 기준 재설정 
+	}
+
+	public int getExpectStandard() {
+		return recommend.getExpectStandard();
+	}
+	
+	public boolean isListenRecently(Music recommendMusic) {
+		ArrayList<Music> recentlyPlayed = new ArrayList<Music>();
+		if (isBeginnerUser()){ // 초보유저(이때까지 재생한 곡이 20곡 이하)라면 노래재생 목록을 그대로 사용 
+			recentlyPlayed = userHistory.getPlayHistory();
+		}
+		else{
+			recentlyPlayed = getRecentlyPlayed(20);
+		}
+		int playCount = getCountRecently(recentlyPlayed, recommendMusic);
+
+		if( playCount >=3 ){
+			return true;
+		}
+
+		return false;
+	}
+	
+	private boolean isBeginnerUser() {
+		return userHistory.getPlayHistory().size() < 20;
+	}
+
+	private int getCountRecently(ArrayList<Music> recentlyPlayed,
+			Music recommendMusic) {
+		int playCount = 0;
+		
+		for (Music playMusic: recentlyPlayed){//최근 20번동안 들은 곡
+			if (recommendMusic == playMusic){
+				playCount++;
+			}
+		}
+		
+		return playCount;
+	}
+
+	public boolean isAddedFavorite(Music recommendMusic) {
+		if (userHistory.isAlreadyAdded(recommendMusic)){
+			return true;
+		}
+		return false;
 	}
 	
 
@@ -113,5 +163,6 @@ public class User {
 		}
 		return recommendMusic;
 	}
+
 
 }

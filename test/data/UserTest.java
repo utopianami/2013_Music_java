@@ -2,6 +2,9 @@ package data;
 
 import java.util.ArrayList;
 
+import com.mumu.data.Music;
+import com.mumu.data.User;
+
 import junit.framework.TestCase;
 
 

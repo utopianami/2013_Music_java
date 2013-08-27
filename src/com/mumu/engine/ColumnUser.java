@@ -1,10 +1,10 @@
-package engine;
+package com.mumu.engine;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 
-import data.Music;
-import data.User;
+import com.mumu.data.Music;
+import com.mumu.data.User;
 
 public class ColumnUser implements Comparator<ColumnUser> {
 

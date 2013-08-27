@@ -1,6 +1,7 @@
 package data;
 
-import data.Database;
+import com.mumu.data.Database;
+
 import junit.framework.TestCase;
 
 
