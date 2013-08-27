@@ -2,13 +2,14 @@ package com.mumu.engine;
 
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import com.mumu.data.Music;
 import com.mumu.data.User;
 
 public class ColumnMusic implements Comparator<ColumnMusic> {
 
-	private ArrayList<User> sameUser = new ArrayList<User>();
+	private List<User> sameUser = new ArrayList<User>();
 	private Music standardMusic; // 행 
 	private Music compareMusic; // 열 
 	private int sameUserCount;
@@ -28,7 +29,7 @@ public class ColumnMusic implements Comparator<ColumnMusic> {
 		return compareMusic;
 	}
 	
-	public ArrayList<User> getSameUser(){
+	public List<User> getSameUser(){
 		return sameUser;
 	}
 	

@@ -1,26 +1,26 @@
 package com.mumu.engine;
 
 import java.util.ArrayList;
-
+import java.util.List;
 import com.mumu.data.Music;
 import com.mumu.data.User;
 
 public class Row {
-	private ArrayList<ColumnUser> rowUser = new ArrayList<ColumnUser>();
-	private ArrayList<ColumnMusic> rowMusic = new ArrayList<ColumnMusic>();
+	private List<ColumnUser> rowUser = new ArrayList<ColumnUser>();
+	private List<ColumnMusic> rowMusic = new ArrayList<ColumnMusic>();
 
 	
-	public ArrayList<ColumnUser> getRowUser(){
+	public List<ColumnUser> getRowUser(){
 		return rowUser;
 	}
 
-	public ArrayList<ColumnMusic> getRowMusic(){
+	public List<ColumnMusic> getRowMusic(){
 		return rowMusic;
 	}
 	
 	//matrixUser
 	public void makeRowUser(User standardUser, 
-			ArrayList<User> userList) {
+			List<User> userList) {
 		
 		
 		for (User compareUser : userList) {
@@ -32,7 +32,7 @@ public class Row {
 	
 	//matrixMusic 
 	public void makeRowMusic(Music standardMusic, 
-			ArrayList<Music> musicList) {
+			List<Music> musicList) {
 
 		
 		for (Music compareMusic : musicList) {

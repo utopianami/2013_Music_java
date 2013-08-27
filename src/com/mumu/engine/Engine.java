@@ -2,6 +2,7 @@ package com.mumu.engine;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import com.mumu.data.Database;
 import com.mumu.data.Music;
@@ -35,7 +36,7 @@ public class Engine {
 	 * 2. columnUser 생성 : ColumnUser Class에서 같은 곡의 리스트. 수, 행, 열 저장 
 	 */
 	public void makeUserMatrix(Database db){
-		ArrayList<User> userList = db.getUserList();
+		List<User> userList = db.getUserList();
 		
 		for (User standardUser : userList) {
 			Row row = new Row();
@@ -45,7 +46,7 @@ public class Engine {
 	}
 
 	public void makeMusicMatrix(Database db){
-		ArrayList<Music> musicList = db.getMusicList();
+		List<Music> musicList = db.getMusicList();
 		
 		for (Music standardMusic : musicList) {
 			Row row = new Row();

@@ -2,13 +2,14 @@ package com.mumu.data;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Recommend {
 	
 	private HashMap<Integer, Integer> standardMap = new HashMap<Integer, Integer>(); //기준들에 대한 값 정리
-	private ArrayList<Integer> expectRecommend = new ArrayList<Integer>();//앞으로 추천할 리스트 만들기  
-	private ArrayList<Integer> finishStandard = new ArrayList<Integer>();//추천받은 기준리스트 
-	private ArrayList<Music> finishRecommendMusic = new ArrayList<Music>(); //추천받은 노래리스트
+	private List<Integer> expectRecommend = new ArrayList<Integer>();//앞으로 추천할 리스트 만들기  
+	private List<Integer> finishStandard = new ArrayList<Integer>();//추천받은 기준리스트 
+	private List<Music> finishRecommendMusic = new ArrayList<Music>(); //추천받은 노래리스트
 	private int totalRecommend; //총 추천한 횟수 + 추천 성공 수 
 	private int recommendTurn = finishRecommendMusic.size(); // 추천해줘야될 순서 
 	

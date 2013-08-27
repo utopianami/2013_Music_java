@@ -3,13 +3,14 @@ package com.mumu.data;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class UserHistory {
 	
-	private ArrayList<Music> MyMusic = new ArrayList<Music>();
+	private List<Music> MyMusic = new ArrayList<Music>();
 	private Set<Music> favouriteMusic = new HashSet<Music>();
-	private ArrayList<Music> playHistory = new ArrayList<Music>();
+	private List<Music> playHistory = new ArrayList<Music>();
 	private HashMap<Music, Integer> musicCount = new HashMap<Music, Integer>();
 		
 	public static UserHistory create() {
@@ -17,7 +18,7 @@ public class UserHistory {
 	}
 		
 	//user class 데이터 전송 
-	public ArrayList<Music> getMyMusic() {
+	public List<Music> getMyMusic() {
 		return MyMusic;
 	}
 	
@@ -29,7 +30,7 @@ public class UserHistory {
 		return favouriteMusic;
 	}
 	
-	public ArrayList<Music> getPlayHistory(){
+	public List<Music> getPlayHistory(){
 		return playHistory;
 	}
 	

@@ -1,6 +1,7 @@
 package com.mumu.data;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import com.mumu.engine.Engine;
@@ -50,7 +51,7 @@ public class User {
 	}
 	
 	//userHistory Data에 접근 
-	public ArrayList<Music> getMyMusic(){
+	public List<Music> getMyMusic(){
 		return userHistory.getMyMusic();
 	}
 	
@@ -86,7 +87,7 @@ public class User {
 	}
 	
 	public boolean isListenRecently(Music recommendMusic) {
-		ArrayList<Music> recentlyPlayed = new ArrayList<Music>();
+		List<Music> recentlyPlayed = new ArrayList<Music>();
 		if (isBeginnerUser()){ // 초보유저(이때까지 재생한 곡이 20곡 이하)라면 노래재생 목록을 그대로 사용 
 			recentlyPlayed = userHistory.getPlayHistory();
 		}
@@ -106,7 +107,7 @@ public class User {
 		return userHistory.getPlayHistory().size() < 20;
 	}
 
-	private int getCountRecently(ArrayList<Music> recentlyPlayed,
+	private int getCountRecently(List<Music> recentlyPlayed,
 			Music recommendMusic) {
 		int playCount = 0;
 		

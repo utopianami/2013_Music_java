@@ -1,6 +1,7 @@
 package com.mumu.data;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 
@@ -11,7 +12,7 @@ public class Music {
 	private String artist;
 	private String album;
 	
-	private ArrayList<User> userList = new ArrayList<User>();
+	private List<User> userList = new ArrayList<User>();
 
 
 	private Music(int musicIndex, String track,
@@ -44,7 +45,7 @@ public class Music {
 		return this.album;
 	}
 	
-	public ArrayList<User> getUserList(){
+	public List<User> getUserList(){
 		return userList;
 	}
 	
