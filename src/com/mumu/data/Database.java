@@ -9,6 +9,7 @@ public class Database {
 	private int musicIndex;
 	private List<User> userList = new ArrayList<User>();
 	private List<Music> musicList = new ArrayList<Music>();
+	private TodayInfo todayInfo = TodayInfo.crate();
 	
 	
 	private static Database var = new Database();
@@ -46,6 +47,10 @@ public class Database {
 	
 	public List<Music> getMusicList() {
 		return musicList;
+	}
+	public void listenedByWeather(Music music) {
+		todayInfo.listenedByWeather(music);
+		
 	}
 	
 }

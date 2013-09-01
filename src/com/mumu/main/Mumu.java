@@ -44,6 +44,7 @@ public class Mumu {
 	}
 	
 	private void listenedMusic(User user, Music music){
+		db.listenedByWeather(music);
 		user.listenedMusic(music);
 	}
 	

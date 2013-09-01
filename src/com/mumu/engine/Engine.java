@@ -6,9 +6,6 @@ import com.mumu.data.User;
 
 public interface Engine {
 	
-	Matrix matrix = Matrix.create();
-	
-	// matrix생성 & 노래 추천 
 	public void makeUserMatrix(Database db); 
 	public void makeMusicMatrix(Database db);
 	public Music recommendMusic(int standardNumber, Database db, User standardUser);
