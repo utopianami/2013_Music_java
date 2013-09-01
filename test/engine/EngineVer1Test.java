@@ -2,14 +2,17 @@ package engine;
 
 import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.*;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import com.mumu.data.Database;
 import com.mumu.data.Music;
 import com.mumu.data.User;
 import com.mumu.engine.Engine;
+import com.mumu.engine.EngineVer1;
 
-public class EngineTest {
+public class EngineVer1Test {
 
 	Database db;
 	Engine engine;
@@ -17,7 +20,7 @@ public class EngineTest {
 	
 	@Before
 	public void setUp(){
-		engine = Engine.getInstance();
+		engine = EngineVer1.getInstance();
 		db = Database.getInstance();
 		
 		db.addUser("영남");
@@ -136,19 +139,19 @@ public class EngineTest {
 	@Test
 	public void recommendMusic2(){
 		//MatrixTest 결과를 참고. 0번 노래와 유사한 노래는은 3번 노래 
-		User standardUser = db.findUser(1);
+		User standardUser = db.findUser(2);
 		Music mostListenedMusic = db.findMusic(0);
 		standardUser.listenedMusic(mostListenedMusic);
 
 		Music music = engine.recommnedMusic2(db, standardUser);
-		assertThat(music, is(db.findMusic(3)));
+		assertThat(music, is(db.findMusic(1)));
 	}
 	
 	@Test
 	public void recommendMusic(){
 		//위의 두 테스틑 토대로
 		User standardUser1 = db.findUser(0);
-		User standardUser2 = db.findUser(1);
+		User standardUser2 = db.findUser(2);
 		Music mostListenedMusic = db.findMusic(0);
 		
 		Music resultMusic = engine.recommendMusic(1, db, standardUser1);
@@ -156,6 +159,6 @@ public class EngineTest {
 
 		standardUser2.listenedMusic(mostListenedMusic);
 		Music resultMusic2 = engine.recommendMusic(2, db, standardUser2);
-		assertThat(resultMusic2, is(db.findMusic(3)));
+		assertThat(resultMusic2, is(db.findMusic(1)));
 	}
 }

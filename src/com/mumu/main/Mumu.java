@@ -4,6 +4,7 @@ import com.mumu.data.Database;
 import com.mumu.data.Music;
 import com.mumu.data.User;
 import com.mumu.engine.Engine;
+import com.mumu.engine.EngineVer1;
 
 public class Mumu {
 	
@@ -16,7 +17,7 @@ public class Mumu {
 	}
 	
 	//engine, db 생성 
-	Engine engine = Engine.getInstance();
+	Engine engine = EngineVer1.getInstance();
 	Database db = Database.getInstance();
 	
 
