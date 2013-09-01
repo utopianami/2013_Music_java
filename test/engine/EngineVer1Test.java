@@ -9,13 +9,12 @@ import org.junit.Test;
 import com.mumu.data.Database;
 import com.mumu.data.Music;
 import com.mumu.data.User;
-import com.mumu.engine.Engine;
 import com.mumu.engine.EngineVer1;
 
 public class EngineVer1Test {
 
 	Database db;
-	Engine engine;
+	EngineVer1 engine;
 	
 	
 	@Before

@@ -12,7 +12,6 @@ public class MumuTest {
 
 	Mumu mumu;
 	
-	
 	@Before
 	public void setUp(){
 		mumu = Mumu.getInstance();

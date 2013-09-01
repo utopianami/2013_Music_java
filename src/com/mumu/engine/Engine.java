@@ -8,10 +8,9 @@ public interface Engine {
 	
 	Matrix matrix = Matrix.create();
 	
-	public void makeUserMatrix(Database db);
+	// matrix생성 & 노래 추천 
+	public void makeUserMatrix(Database db); 
 	public void makeMusicMatrix(Database db);
 	public Music recommendMusic(int standardNumber, Database db, User standardUser);
-	public Music recommendMusic1(Database db, User standardUser);
-	public Music recommnedMusic2(Database db, User standardUser);
 
 }
