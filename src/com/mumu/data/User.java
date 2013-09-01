@@ -3,8 +3,7 @@ package com.mumu.data;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import com.mumu.engine.Engine;
+import com.mumu.engine.Matrix;
 
 public class User {
 
@@ -58,7 +57,7 @@ public class User {
 	}
 	
 	//userHistory Data에 접근 
-	public List<Music> getMyMusic(){
+	public Set<Music> getMyMusic(){
 		return userHistory.getMyMusic();
 	}
 	
@@ -86,6 +85,10 @@ public class User {
 	
 	public int getExpectStandard() {
 		return recommend.getExpectStandard();
+	}
+	
+	public List<Music> getRecommendMusic(){
+		return recommend.getRecommendMusic();
 	}
 	
 	public boolean isListenRecently(Music music) {
@@ -147,10 +150,10 @@ public class User {
 		return recommendMusic;
 	}
 
-	public Music getRecomendMusic2(User user, Engine engine, Database db) {
+	public Music getRecomendMusic2(User user, Matrix matrix) {
 		Music recommendMusic = null;
 		for (Music music : user.getRecentlyPlayed(5)) {
-			Music mostRelationMusic = engine.relationMusic(db, music);
+			Music mostRelationMusic = matrix.relationMusic(music.getMusicIndex());
 			
 			if(!user.isListened(mostRelationMusic)){
 				recommendMusic = mostRelationMusic;

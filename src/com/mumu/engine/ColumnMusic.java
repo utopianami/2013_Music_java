@@ -33,14 +33,14 @@ public class ColumnMusic implements Comparator<ColumnMusic> {
 		return sameUser;
 	}
 	
-	public int getSameMusicCount(){
+	public int getSamrUserCount(){
 		return sameUserCount;
 	}
 
 
 	@Override
 	public int compare(ColumnMusic o1, ColumnMusic o2) {
-		return o2.sameUserCount - o1.sameUserCount;
+		return  o2.sameUserCount - o1.sameUserCount;
 	}
 
 }

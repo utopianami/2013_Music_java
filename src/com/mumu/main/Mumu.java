@@ -21,11 +21,11 @@ public class Mumu {
 	
 
 	//사용자 시나리오 
-	public void createUser(String name){
+	public void addUser(String name){
 		db.addUser(name);
 	}
 	
-	public void createMusic(String track, String artist, String album){
+	public void addMusic(String track, String artist, String album){
 		db.addMusic(track, artist, album);
 	}
 	
@@ -61,8 +61,7 @@ public class Mumu {
 	}
 	
 	//노래추천 
-	public void recommendMusic(int userIndex){
-		User standardUser = db.findUser(userIndex);
+	public void recommendMusic(User standardUser){
 		int standardNumber = standardUser.getExpectStandard();
 		
 		Music recommendMusic = engine.recommendMusic(standardNumber, db, standardUser);

@@ -1,23 +1,28 @@
 package engine;
 
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
-import com.mumu.data.Database;
-import com.mumu.data.Music;
-import com.mumu.data.User;
-import com.mumu.engine.Engine;
 
-public class EngineTest {
+import com.mumu.data.Database;
+import com.mumu.engine.ColumnMusic;
+import com.mumu.engine.ColumnUser;
+import com.mumu.engine.Matrix;
+import com.mumu.engine.Row;
+
+public class MatrixTest {
 
 	Database db;
-	Engine engine;
+	Matrix matrix;
 	
 	
 	@Before
 	public void setUp(){
-		engine = Engine.getInstance();
+		matrix = Matrix.create();
 		db = Database.getInstance();
 		
 		db.addUser("영남");
@@ -117,45 +122,27 @@ public class EngineTest {
 		db.findUser(9).listenedMusic(db.findMusic(9));
 		}
 	
-	@Before
-	public void makeMatrix(){
-		engine.makeMusicMatrix(db);
-		engine.makeUserMatrix(db);
-	}
-
 	@Test
-	public void recommendMusic1(){
-		//MatrixTest 결과를 참고. 0번과 유사한 사람은 4번 
-		User standardUser = db.findUser(0);
-		User targetUser = db.findUser(4);
-		Music music = engine.recommendMusic1(db, standardUser);
-		assertThat(targetUser.getMyMusic().contains(music), is(true));
-		assertThat(music, is(db.findMusic(2)));
-	}
-	
-	@Test
-	public void recommendMusic2(){
-		//MatrixTest 결과를 참고. 0번 노래와 유사한 노래는은 3번 노래 
-		User standardUser = db.findUser(1);
-		Music mostListenedMusic = db.findMusic(0);
-		standardUser.listenedMusic(mostListenedMusic);
-
-		Music music = engine.recommnedMusic2(db, standardUser);
-		assertThat(music, is(db.findMusic(3)));
-	}
-	
-	@Test
-	public void recommendMusic(){
-		//위의 두 테스틑 토대로
-		User standardUser1 = db.findUser(0);
-		User standardUser2 = db.findUser(1);
-		Music mostListenedMusic = db.findMusic(0);
+	public void makeMusicMatrix(){
+		matrix.makeMusicMatrix(db);
+		Row firstMusicResult = matrix.getMusicMatrix(0);
+		List<ColumnMusic> fisrtMusicRow = matrix.getMusicMatrix(0).getRowMusic();
 		
-		Music resultMusic = engine.recommendMusic(1, db, standardUser1);
-		assertThat(resultMusic, is(db.findMusic(2)));
-
-		standardUser2.listenedMusic(mostListenedMusic);
-		Music resultMusic2 = engine.recommendMusic(2, db, standardUser2);
-		assertThat(resultMusic2, is(db.findMusic(3)));
+		assertThat(fisrtMusicRow.get(3).getSamrUserCount(), is(5));
+		assertThat(fisrtMusicRow.get(5).getSamrUserCount(), is(4));
+		assertThat(firstMusicResult.getMostRelationMusic(), is(db.findMusic(3)));
 	}
+	
+	@Test
+	public void makeUserMatrix(){
+		matrix.makeUserMatrix(db);
+		Row fisrtUserResult = matrix.getUserMatrix(0);
+		List<ColumnUser> fisrtUserRow = matrix.getUserMatrix(0).getRowUser();
+		
+		assertThat(fisrtUserRow.get(0).getStandardUser(), is(db.findUser(0)));
+		assertThat(fisrtUserRow.get(0).getSameMusicCount(), is(5));
+		assertThat(fisrtUserRow.get(1).getSameMusicCount(), is(2));
+		assertThat(fisrtUserResult.getMostRelationUser(), is(db.findUser(4)));
+	}
+
 }

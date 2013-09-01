@@ -139,6 +139,10 @@ public class Recommend {
 		return randomVar <= probabilityTable.get(1);
 	}
 
+	public List<Music> getRecommendMusic() {
+		return finishRecommendMusic;
+	}
+
 
 
 }

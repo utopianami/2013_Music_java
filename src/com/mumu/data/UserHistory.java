@@ -8,7 +8,7 @@ import java.util.Set;
 
 public class UserHistory {
 	
-	private List<Music> MyMusic = new ArrayList<Music>();
+	private Set<Music> MyMusic = new HashSet<Music>();
 	private Set<Music> favouriteMusic = new HashSet<Music>();
 	private List<Music> playHistory = new ArrayList<Music>();
 	private HashMap<Music, Integer> musicCount = new HashMap<Music, Integer>();
@@ -18,7 +18,7 @@ public class UserHistory {
 	}
 		
 	//user class 데이터 전송 
-	public List<Music> getMyMusic() {
+	public Set<Music> getMyMusic() {
 		return MyMusic;
 	}
 	
@@ -51,9 +51,9 @@ public class UserHistory {
 	public void listenedMusic(Music music, User user) {
 		playHistory.add(music);
 		addMusicCount(music);
+		MyMusic.add(music);
 		
 		if (firstListend(music)){
-			MyMusic.add(music);
 			music.addUserList(user);
 		}
 	}

@@ -1,7 +1,9 @@
 package com.mumu.engine;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
 import com.mumu.data.Music;
 import com.mumu.data.User;
 
@@ -42,12 +44,21 @@ public class Row {
 		}
 	}
 
+ 
 	public Music getMostRelationMusic() {
-		return rowMusic.get(1).getCompareMusic(); //자기 자신을 제외한 최상위 index 1
+		List<ColumnMusic> compareList = new ArrayList<ColumnMusic>();
+		compareList = rowMusic;
+		
+		Collections.sort(compareList, new ColumnMusic());
+		return compareList.get(1).getCompareMusic(); //자기 자신을 제외한 최상위 index 1
 	}
 	
 	public User getMostRelationUser() {
-		return rowUser.get(1).getCompareUser(); //자기 자신을 제외한 최상위 index 1
+		List<ColumnUser> compareList = new ArrayList<ColumnUser>();
+		compareList = rowUser;
+		
+		Collections.sort(compareList, new ColumnUser());
+		return compareList.get(1).getCompareUser(); //자기 자신을 제외한 최상위 index 1
 	}
 	
 	
