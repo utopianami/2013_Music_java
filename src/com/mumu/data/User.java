@@ -46,6 +46,13 @@ public class User {
 		userHistory.removeFavouriteMusic(music);
 	}
 	
+	public boolean isAddedFavorite(Music music) {
+		if (userHistory.isAlreadyAdded(music)){
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean isListened(Music music){
 		return !userHistory.firstListend(music);
 	}
@@ -55,7 +62,7 @@ public class User {
 		return userHistory.getMyMusic();
 	}
 	
-	public ArrayList<Music> getRecentlyPlayed(int range){
+	public List<Music> getRecentlyPlayed(int range){
 		return userHistory.getRecentlyPlayed(range);
 	}
 	
@@ -70,32 +77,28 @@ public class User {
 	//recommend에 접근
 	public void takeRecommendMusic(Music recommendMusic, int standardNumber) {
 		if (recommend.isOverRecommendLength()){ //추천을 7번 해줬다면 
-			resetExpectRecommend(); // 이전 추천결과에 대한 결과 확인 + 기준 재설정 
+			recommend.checkRecommendResult(this); //이전 추천에 대한 결과확인 
+			recommend.resetExpectStandard(); // 기준 재설정 
 			recommend.reset(); //추천받은 기준 리스트 + 추천해준 노래 리스트 초기화(0)
 		}
-
 		recommend.takeRecommendMusic(recommendMusic, standardNumber);
 	}
 	
-	public void resetExpectRecommend(){
-		recommend.checkRecommendResult(this); //이전 추천에 대한 결과확인 
-		recommend.resetExpectStandard(); // 기준 재설정 
-	}
-
 	public int getExpectStandard() {
 		return recommend.getExpectStandard();
 	}
 	
-	public boolean isListenRecently(Music recommendMusic) {
+	public boolean isListenRecently(Music music) {
 		List<Music> recentlyPlayed = new ArrayList<Music>();
+		
 		if (isBeginnerUser()){ // 초보유저(이때까지 재생한 곡이 20곡 이하)라면 노래재생 목록을 그대로 사용 
 			recentlyPlayed = userHistory.getPlayHistory();
 		}
 		else{
 			recentlyPlayed = getRecentlyPlayed(20);
 		}
-		int playCount = getCountRecently(recentlyPlayed, recommendMusic);
-
+		
+		int playCount = getCountRecently(recentlyPlayed, music);
 		if( playCount >=3 ){
 			return true;
 		}
@@ -108,25 +111,17 @@ public class User {
 	}
 
 	private int getCountRecently(List<Music> recentlyPlayed,
-			Music recommendMusic) {
+			Music music) {
 		int playCount = 0;
 		
 		for (Music playMusic: recentlyPlayed){//최근 20번동안 들은 곡
-			if (recommendMusic == playMusic){
+			if (music == playMusic){
 				playCount++;
 			}
 		}
 		
 		return playCount;
 	}
-
-	public boolean isAddedFavorite(Music recommendMusic) {
-		if (userHistory.isAlreadyAdded(recommendMusic)){
-			return true;
-		}
-		return false;
-	}
-	
 
 	//engine
 	public ArrayList<Music> compareMusic(User compareUser) {

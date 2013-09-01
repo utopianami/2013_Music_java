@@ -35,7 +35,7 @@ public class UserHistory {
 	}
 	
 	//range 범위만큼 최신곡 리스트 전달 
-	public ArrayList<Music> getRecentlyPlayed(int range){
+	public List<Music> getRecentlyPlayed(int range){
 		ArrayList<Music> recentlyPlayed = new ArrayList<Music>();
 		
 		int mostPlayedIndex = playHistory.size() - 1;
@@ -80,12 +80,10 @@ public class UserHistory {
 			favouriteMusic.add(music);
 		}
 	}
-	
 
 	public void removeFavouriteMusic(Music music) {
 		favouriteMusic.remove(music);
 	}
-
 
 	public boolean isAlreadyAdded(Music music) {
 		return favouriteMusic.contains(music);

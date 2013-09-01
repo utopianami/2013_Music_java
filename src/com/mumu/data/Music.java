@@ -53,8 +53,8 @@ public class Music {
 		userList.add(user);
 	}
 
-	public ArrayList<User> compareUser(Music compareMusic) {
-		ArrayList<User> sameUser = new ArrayList<User>();
+	public List<User> compareUser(Music compareMusic) {
+		List<User> sameUser = new ArrayList<User>();
 		
 		for (User user : compareMusic.getUserList()){
 			if(isSameUser(user)){
